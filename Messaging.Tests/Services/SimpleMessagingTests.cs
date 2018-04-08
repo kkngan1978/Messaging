@@ -8,7 +8,7 @@ using Messaging.Services.Common;
 namespace Messaging.Tests.Services
 {
     [TestClass]
-    public class MessagingTests : MessagingBase
+    public class SimpleMessagingTests : MessagingBase
     {
         [TestMethod]
         public void PublisherSubscriberTestAgainstPublisherClasss_WhenSubscriberDoesntSetupAccordingly_ExpectPublisherTransformAndPublishDataNotSentAndErrorLogAttached()
@@ -22,7 +22,7 @@ namespace Messaging.Tests.Services
             mockMessaging.MessagingPublisher = mockMessagingPublisher;
             mockMessaging.MessagingSubscriber = mockMessagingSubscriber;
 
-            mockMessaging.SendMessage((data) => { ErrorLog = data; }, Message);
+            mockMessaging.SendMessage((data) => { ErrorLog = data; }, Formatter);
 
             Assert.AreEqual(ExceptionCode.SimpleMessaging_NullExceptionThrownForPublisherOverSubscriber, ErrorLog);
             
@@ -45,7 +45,7 @@ namespace Messaging.Tests.Services
             mockMessaging.MessagingPublisher.Stub(x => x.DataPublisher += Arg<EventHandler<String>>.Is.Anything);
 
             mockMessaging.MessagingSubscriber = mockMessagingSubscriber;
-            mockMessaging.SendMessage((data) => { ErrorLog = data; }, Message);
+            mockMessaging.SendMessage((data) => { ErrorLog = data; }, Formatter);
             
             Assert.AreEqual("", ErrorLog);
 

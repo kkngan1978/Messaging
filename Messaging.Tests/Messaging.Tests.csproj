@@ -104,10 +104,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
-    <Compile Include="Services\MessagingBase.cs" />
+    <Compile Include="Services\Base\MessagingBase.cs" />
+    <Compile Include="Services\MessageFormatterTest.cs" />
     <Compile Include="Services\MessagingPublisherTest.cs" />
     <Compile Include="Services\MessagingSubscriberTests.cs" />
-    <Compile Include="Services\MessagingTests.cs" />
+    <Compile Include="Services\SimpleMessagingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

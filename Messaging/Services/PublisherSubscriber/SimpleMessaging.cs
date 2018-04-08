@@ -1,6 +1,7 @@
 ﻿using Messaging.Services.Common;
 using Messaging.Services.PublisherSubscriber.Interfaces;
 using System;
+using Messaging.Services.MessageMassage;
 
 namespace Messaging.Services.PublisherSubscriber
 {
@@ -17,8 +18,9 @@ namespace Messaging.Services.PublisherSubscriber
         /// messages
         /// </summary>
         /// <param name="errorHandler">Error Log Action Handler Expect to be log</param>
-        /// <param name="message">Message to be sent</param>
-        public void SendMessage(Action<String> errorHandler, String message)
+        /// <param name="messageFormatter">An Implementation That Hold Massage Data Implementation</param>
+        public void SendMessage(Action<String> errorHandler,
+            IMessageFormatter messageFormatter)
         {
             // Instantiate A Publisher
             if (MessagingPublisher == null)
@@ -35,8 +37,7 @@ namespace Messaging.Services.PublisherSubscriber
             else
             {
                 MessagingSubscriber.Publisher.DataPublisher += PublisherOnDataPublisher;
-                message = message + " : Massage Contents Went Here";
-                MessagingPublisher.TransformAndPublishData(errorHandler, message);
+                MessagingPublisher.TransformAndPublishData(errorHandler, messageFormatter.MassageData());
             }
         }
 
